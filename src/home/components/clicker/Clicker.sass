@@ -1,0 +1,86 @@
+.Clicker
+    // background-color: pink
+    position: relative
+    height: 70vh
+    text-align: center
+
+    .lvl
+        margin-top: 10px
+
+        h4
+            display: flex
+            align-items: center
+            gap: 5px
+            text-align: left
+            color: #eee
+            margin-bottom: 5px
+
+            img
+                width: 25px
+
+        span
+            display: block
+            border-radius: 20px
+            width: 100%
+            height: 20px
+            border: 2px solid #2A3744
+            background: #121E28
+            position: relative
+
+            &::before
+                content: ''
+                border-radius: 20px
+                position: absolute
+                top: 0
+                left: 0
+                width: 80%
+                height: 100%
+                background-color: red
+
+                background-color: #4158D0
+                background-image: linear-gradient(90deg, #4158D0 0%, #C850C0 46%, #FFCC70 100%)
+
+    .click-effect
+        position: absolute
+        font-size: 30px
+        color: #fff
+        font-weight: 800
+        animation: fade-out 1s forwards
+        user-select: none
+        pointer-events: none
+
+        @keyframes fade-out
+            0%
+                opacity: 1
+                transform: translateY(0)
+                
+            100%
+                opacity: 0
+                transform: translateY(-150px)
+
+    img
+        width: calc( 100% - 20px )
+        transition: 0.1s
+        cursor: pointer
+
+    .clickImg
+        &.right
+            transform: rotate(10deg) scale(0.9)
+
+        &.left
+            transform: rotate(-10deg) scale(0.9)
+
+
+    .energy
+        text-align: left
+        display: flex
+        align-items: center
+        img
+            width: 50px
+
+        h3
+            font-weight: 500
+            color: #eee
+
+            span
+                opacity: 0.5
