@@ -35,9 +35,9 @@ export default function Clicker() {
         }));
 
         setClicks((prevClicks) => [...prevClicks, ...newClicks]);
-
-        if ("vibrate" in navigator) {
-            navigator.vibrate(1000);
+        
+        if ('vibrate' in navigator) {
+            navigator.vibrate(50); // Vibrate for 50 milliseconds
         }
 
         setTimeout(() => {
