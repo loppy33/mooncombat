@@ -1,4 +1,4 @@
-import React, { useState, useRef, useCallback } from 'react';
+import React, { useState, useRef, useCallback, useEffect } from 'react';
 import './Clicker.sass';
 import ImageGold from '../../../assets/pngs/gold.png';
 import GifFire from '../../../assets/gifs/fire.webp';
@@ -26,7 +26,7 @@ export default function Clicker() {
         const container = containerRef.current.getBoundingClientRect();
 
         setTilt('');
-        setEnergy((prevEnergy) => prevEnergy - touches.length);
+        setEnergy((prevEnergy) => Math.max(prevEnergy - touches.length, 0));
 
         const newClicks = Array.from(touches).map((touch, index) => ({
             id: Date.now() + index,
@@ -35,6 +35,10 @@ export default function Clicker() {
         }));
 
         setClicks((prevClicks) => [...prevClicks, ...newClicks]);
+
+        if (navigator.vibrate) {
+            navigator.vibrate(50); // Vibrate for 50 milliseconds
+        }
 
         setTimeout(() => {
             setClicks((prevClicks) => prevClicks.filter(click => !newClicks.some(newClick => newClick.id === click.id)));
@@ -60,12 +64,12 @@ export default function Clicker() {
                         autoplay={true}
                         className="clickImg"
                     />
-                    {clicks.map((click) => (
-                        <div key={click.id} className="click-effect" style={{ top: click.y, left: click.x }}>
-                            + 1
-                        </div>
-                    ))}
                 </div>
+                {clicks.map((click) => (
+                    <div key={click.id} className="click-effect" style={{ top: click.y, left: click.x }}>
+                        + 1
+                    </div>
+                ))}
 
                 <div className="energy">
                     <img src={GifFire} alt="" />

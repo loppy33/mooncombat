@@ -1,11 +1,9 @@
 .Clicker
-    // background-color: pink
     position: relative
     height: 70vh
     text-align: center
 
     .lvl
-
         h4
             display: flex
             align-items: center
@@ -13,10 +11,8 @@
             text-align: left
             color: #eee
             margin-bottom: 5px
-
             img
                 width: 25px
-
         span
             display: block
             border-radius: 20px
@@ -25,7 +21,6 @@
             border: 2px solid #2A3744
             background: #121E28
             position: relative
-
             &::before
                 content: ''
                 border-radius: 20px
@@ -34,8 +29,6 @@
                 left: 0
                 width: 80%
                 height: 100%
-                background-color: red
-
                 background-color: #4158D0
                 background-image: linear-gradient(90deg, #4158D0 0%, #C850C0 46%, #FFCC70 100%)
 
@@ -52,7 +45,6 @@
             0%
                 opacity: 1
                 transform: translateY(0)
-
             100%
                 opacity: 0
                 transform: translateY(-150px)
@@ -60,15 +52,13 @@
     .clickContainer
         &.right
             transform: rotate(10deg) scale(0.9)
-
         &.left
             transform: rotate(-10deg) scale(0.9)
 
         .clickImg
-            width: calc( 100% - 20px )
+            width: calc(100% - 20px)
             transition: 0.1s
             cursor: pointer
-
             padding-top: 30px
 
     .energy
@@ -77,10 +67,8 @@
         align-items: center
         img
             width: 50px
-
         h3
             font-weight: 500
             color: #eee
-
             span
                 opacity: 0.5
