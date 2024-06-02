@@ -5,7 +5,6 @@
     text-align: center
 
     .lvl
-        margin-top: 10px
 
         h4
             display: flex
@@ -53,24 +52,23 @@
             0%
                 opacity: 1
                 transform: translateY(0)
-                
+
             100%
                 opacity: 0
                 transform: translateY(-150px)
 
-    img
+    .clickImg
         width: calc( 100% - 20px )
         transition: 0.1s
         cursor: pointer
 
-    .clickImg
-        paddings-top: 25px
+        padding-top: 30px
+
         &.right
             transform: rotate(10deg) scale(0.9)
 
         &.left
             transform: rotate(-10deg) scale(0.9)
-
 
     .energy
         text-align: left

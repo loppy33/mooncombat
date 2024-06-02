@@ -4,6 +4,11 @@ import ImageGold from '../../../assets/pngs/gold.png';
 import GifFire from '../../../assets/gifs/fire.webp';
 import GifCloud from '../../../assets/gifs/cloud.webp';
 
+import Lottie from 'lottie-react';
+
+
+import Diamon from './diamond.json'
+
 export default function Clicker() {
     const [energy, setEnergy] = useState(1000);
     const [clicks, setClicks] = useState([]);
@@ -51,13 +56,25 @@ export default function Clicker() {
                     <span></span>
                 </div>
 
-                <img
+                <Lottie 
+                    animationData={Diamon} // JSON-данные вашей анимации
+                    loop={true}
+                    autoplay={true}
                     onTouchStart={handleTouch}
                     className={`clickImg ${tilt}`}
-                    src="https://em-content.zobj.net/source/telegram/386/clown-face_1f921.webp"
-                    alt=""
                 />
-                
+
+
+                {/* <picture>
+                    <source srcset="cloud.webp" type="image/webp" />
+                    <img
+                        onTouchStart={handleTouch}
+                        className={`clickImg ${tilt}`}
+                        src={GifCloud}
+                        alt=""
+                    />
+                </picture> */}
+
                 <div className="energy">
                     <img src={GifFire} alt="" />
                     <h3>{energy} <br /><span>/ 1000</span></h3>
