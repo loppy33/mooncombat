@@ -57,18 +57,19 @@
                 opacity: 0
                 transform: translateY(-150px)
 
-    .clickImg
-        width: calc( 100% - 20px )
-        transition: 0.1s
-        cursor: pointer
-
-        padding-top: 30px
-
+    .clickContainer
         &.right
             transform: rotate(10deg) scale(0.9)
 
         &.left
             transform: rotate(-10deg) scale(0.9)
+
+        .clickImg
+            width: calc( 100% - 20px )
+            transition: 0.1s
+            cursor: pointer
+
+            padding-top: 30px
 
     .energy
         text-align: left

@@ -12,33 +12,33 @@ export default function Clicker() {
     const [tilt, setTilt] = useState('');
     const containerRef = useRef(null);
 
-    const handleTouch = useCallback(async (event) => {
+    const handleTouchStart = useCallback((event) => {
         const container = containerRef.current.getBoundingClientRect();
         const touches = event.touches;
-        const newClicks = [];
 
-        for (let i = 0; i < touches.length; i++) {
-            const touch = touches[i];
-            newClicks.push({
-                id: Date.now() + i,
-                x: touch.clientX - container.left,
-                y: touch.clientY - container.top,
-            });
+        const imageCenterX = container.left + container.width / 2;
+        const newTilt = touches[0].clientX < imageCenterX ? 'left' : 'right';
+        setTilt(newTilt);
+    }, []);
 
-            const imageCenterX = container.left + container.width / 2;
-            setTilt(touch.clientX < imageCenterX ? 'left' : 'right');
-        }
+    const handleTouchEnd = useCallback((event) => {
+        const touches = event.changedTouches;
+        const container = containerRef.current.getBoundingClientRect();
 
+        setTilt('');
         setEnergy((prevEnergy) => prevEnergy - touches.length);
+
+        const newClicks = Array.from(touches).map((touch, index) => ({
+            id: Date.now() + index,
+            x: touch.clientX - container.left,
+            y: touch.clientY - container.top,
+        }));
+
         setClicks((prevClicks) => [...prevClicks, ...newClicks]);
 
-        // Фильтрация кликов
-        const currentTime = Date.now();
-        setClicks((prevClicks) => prevClicks.filter(click => currentTime - click.id < 1000));
-
         setTimeout(() => {
-            setTilt('');
-        }, 100); // Duration of the tilt effect
+            setClicks((prevClicks) => prevClicks.filter(click => !newClicks.some(newClick => newClick.id === click.id)));
+        }, 1000);
     }, []);
 
     return (
@@ -49,25 +49,28 @@ export default function Clicker() {
                     <span></span>
                 </div>
 
-                <Lottie 
-                    animationData={Diamon}
-                    loop={true}
-                    autoplay={true}
-                    onTouchStart={handleTouch}
-                    className={`clickImg ${tilt}`}
-                />
+                <div
+                    onTouchStart={handleTouchStart}
+                    onTouchEnd={handleTouchEnd}
+                    className={`clickContainer ${tilt}`}
+                >
+                    <Lottie
+                        animationData={Diamon}
+                        loop={true}
+                        autoplay={true}
+                        className="clickImg"
+                    />
+                    {clicks.map((click) => (
+                        <div key={click.id} className="click-effect" style={{ top: click.y, left: click.x }}>
+                            + 1
+                        </div>
+                    ))}
+                </div>
 
-    
                 <div className="energy">
                     <img src={GifFire} alt="" />
                     <h3>{energy} <br /><span>/ 1000</span></h3>
                 </div>
-
-                {clicks.map((click) => (
-                    <div key={click.id} className="click-effect" style={{ top: click.y, left: click.x }}>
-                        +1
-                    </div>
-                ))}
             </div>
         </div>
     );
