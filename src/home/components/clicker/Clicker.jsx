@@ -22,6 +22,7 @@ export default function Clicker() {
         const imageCenterX = container.left + container.width / 2;
         const newTilt = touches[0].clientX < imageCenterX ? 'left' : 'right';
         setTilt(newTilt);
+        audioRef.current.play();
     }, []);
 
     const handleTouchEnd = useCallback((event) => {
@@ -43,8 +44,8 @@ export default function Clicker() {
             navigator.vibrate(50); // Vibrate for 50 milliseconds
         }
 
+
         // Play the click sound
-        audioRef.current.play();
 
         setTimeout(() => {
             setClicks((prevClicks) => prevClicks.filter(click => !newClicks.some(newClick => newClick.id === click.id)));
