@@ -1,4 +1,4 @@
-import React, { useState, useRef, useCallback, useEffect } from 'react';
+import React, { useState, useRef, useCallback } from 'react';
 import './Clicker.sass';
 import ImageGold from '../../../assets/pngs/gold.png';
 import GifFire from '../../../assets/gifs/fire.webp';
@@ -6,11 +6,14 @@ import GifCloud from '../../../assets/gifs/cloud.webp';
 import Lottie from 'lottie-react';
 import Diamon from './diamond.json';
 
+import ClickSound from './click.mp3';
+
 export default function Clicker() {
     const [energy, setEnergy] = useState(1000);
     const [clicks, setClicks] = useState([]);
     const [tilt, setTilt] = useState('');
     const containerRef = useRef(null);
+    const audioRef = useRef(null);
 
     const handleTouchStart = useCallback((event) => {
         const container = containerRef.current.getBoundingClientRect();
@@ -35,10 +38,13 @@ export default function Clicker() {
         }));
 
         setClicks((prevClicks) => [...prevClicks, ...newClicks]);
-        
+
         if ('vibrate' in navigator) {
             navigator.vibrate(50); // Vibrate for 50 milliseconds
         }
+
+        // Play the click sound
+        audioRef.current.play();
 
         setTimeout(() => {
             setClicks((prevClicks) => prevClicks.filter(click => !newClicks.some(newClick => newClick.id === click.id)));
@@ -76,6 +82,9 @@ export default function Clicker() {
                     <h3>{energy} <br /><span>/ 1000</span></h3>
                 </div>
             </div>
+
+            {/* Define the click sound */}
+            <audio ref={audioRef} src={ClickSound} />
         </div>
     );
 }
