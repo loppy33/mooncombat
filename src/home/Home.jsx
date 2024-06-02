@@ -40,6 +40,7 @@ export default function Home() {
                     <SwiperSlide>
                         <Clicker />
                     </SwiperSlide>
+                    
                     <SwiperSlide>
                         <Friends />
                     </SwiperSlide>
