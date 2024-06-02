@@ -1,13 +1,11 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useCallback } from 'react';
 import Footer from '../footer/Footer';
 import Header from '../header/Header';
 import './Home.sass';
 import Clicker from './components/clicker/Clicker';
 import Friends from './components/friends/Friends';
-
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination } from 'swiper/modules';
-
 import 'swiper/css';
 import 'swiper/css/pagination';
 
@@ -21,7 +19,6 @@ export default function Home() {
                 setActiveSlide(swiperRef.current.swiper.activeIndex);
             });
         }
-
         // Инициализация Telegram Web Apps SDK и запрос на развертывание на полный экран
         if (window.Telegram?.WebApp) {
             const tg = window.Telegram.WebApp;
@@ -29,10 +26,10 @@ export default function Home() {
         }
     }, []);
 
-    const handleSlideChange = (index) => {
+    const handleSlideChange = useCallback((index) => {
         setActiveSlide(index);
         swiperRef.current.swiper.slideTo(index);
-    };
+    }, []);
 
     return (
         <div className="Home">

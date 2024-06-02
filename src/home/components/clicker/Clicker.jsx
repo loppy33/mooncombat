@@ -1,13 +1,10 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useCallback } from 'react';
 import './Clicker.sass';
 import ImageGold from '../../../assets/pngs/gold.png';
 import GifFire from '../../../assets/gifs/fire.webp';
 import GifCloud from '../../../assets/gifs/cloud.webp';
-
 import Lottie from 'lottie-react';
-
-
-import Diamon from './diamond.json'
+import Diamon from './diamond.json';
 
 export default function Clicker() {
     const [energy, setEnergy] = useState(1000);
@@ -15,10 +12,10 @@ export default function Clicker() {
     const [tilt, setTilt] = useState('');
     const containerRef = useRef(null);
 
-    function handleTouch(event) {
+    const handleTouch = useCallback(async (event) => {
         const container = containerRef.current.getBoundingClientRect();
-        const newClicks = [];
         const touches = event.touches;
+        const newClicks = [];
 
         for (let i = 0; i < touches.length; i++) {
             const touch = touches[i];
@@ -29,24 +26,20 @@ export default function Clicker() {
             });
 
             const imageCenterX = container.left + container.width / 2;
-            if (touch.clientX < imageCenterX) {
-                setTilt('left');
-            } else {
-                setTilt('right');
-            }
+            setTilt(touch.clientX < imageCenterX ? 'left' : 'right');
         }
 
-        setEnergy((energy) => energy - touches.length);
-        setClicks((clicks) => [...clicks, ...newClicks]);
+        setEnergy((prevEnergy) => prevEnergy - touches.length);
+        setClicks((prevClicks) => [...prevClicks, ...newClicks]);
 
-        setTimeout(() => {
-            setClicks((clicks) => clicks.filter(click => !newClicks.some(newClick => newClick.id === click.id)));
-        }, 1000);
+        // Фильтрация кликов
+        const currentTime = Date.now();
+        setClicks((prevClicks) => prevClicks.filter(click => currentTime - click.id < 1000));
 
         setTimeout(() => {
             setTilt('');
         }, 100); // Duration of the tilt effect
-    }
+    }, []);
 
     return (
         <div className="Clicker">
@@ -57,24 +50,14 @@ export default function Clicker() {
                 </div>
 
                 <Lottie 
-                    animationData={Diamon} // JSON-данные вашей анимации
+                    animationData={Diamon}
                     loop={true}
                     autoplay={true}
                     onTouchStart={handleTouch}
                     className={`clickImg ${tilt}`}
                 />
 
-
-                {/* <picture>
-                    <source srcset="cloud.webp" type="image/webp" />
-                    <img
-                        onTouchStart={handleTouch}
-                        className={`clickImg ${tilt}`}
-                        src={GifCloud}
-                        alt=""
-                    />
-                </picture> */}
-
+    
                 <div className="energy">
                     <img src={GifFire} alt="" />
                     <h3>{energy} <br /><span>/ 1000</span></h3>
@@ -89,12 +72,3 @@ export default function Clicker() {
         </div>
     );
 }
-
-{/* Какаха */ }
-{/* <img onClick={click} className='clickImg' src="https://em-content.zobj.net/source/telegram/386/pile-of-poo_1f4a9.webp" alt="" /> */ }
-{/* Клоун */ }
-{/* <img onClick={click} className='clickImg' src="https://em-content.zobj.net/source/telegram/386/clown-face_1f921.webp" alt="" /> */ }
-{/* Облочко */ }
-{/* <img onClick={click} className='clickImg' src="https://em-content.zobj.net/source/telegram/386/cloud_2601-fe0f.webp" alt="" /> */ }
-{/* Луна */ }
-{/* <img onClick={click} className='clickImg' src="https://em-content.zobj.net/source/telegram/386/new-moon_1f311.webp" alt="" /> */ }
