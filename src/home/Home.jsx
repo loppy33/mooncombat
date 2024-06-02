@@ -21,6 +21,12 @@ export default function Home() {
                 setActiveSlide(swiperRef.current.swiper.activeIndex);
             });
         }
+
+        // Инициализация Telegram Web Apps SDK и запрос на развертывание на полный экран
+        if (window.Telegram?.WebApp) {
+            const tg = window.Telegram.WebApp;
+            tg.expand();
+        }
     }, []);
 
     const handleSlideChange = (index) => {
