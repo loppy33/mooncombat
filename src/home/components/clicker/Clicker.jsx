@@ -37,7 +37,9 @@ export default function Clicker() {
 
 
             window.navigator.vibrate(50)
-            // Play the click sound
+            const tg = window.Telegram.WebApp
+            tg.HapticFeedback.impactOccurred("light")
+
 
             setTimeout(() => {
                 setClicks((prevClicks) => prevClicks.filter(click => !newClicks.some(newClick => newClick.id === click.id)));
