@@ -41,7 +41,6 @@ export default function Clicker() {
 
             window.navigator.vibrate(50)
 
-            selectionChanged()
 
 
             setTimeout(() => {
@@ -62,6 +61,7 @@ export default function Clicker() {
                     onTouchStart={handleTouchStart}
                     onTouchEnd={handleTouchEnd}
                     className={`clickContainer ${tilt}`}
+                    onClick={() => selectionChanged()}
                 >
                     <Lottie
                         animationData={Diamon}
