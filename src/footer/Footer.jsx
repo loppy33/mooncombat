@@ -1,8 +1,5 @@
 import './Footer.sass';
-import GifMoon from '../assets/gifs/moon.webp';
-import ImageMoon from '../assets/pngs/moon.png';
-import ImageFriends from '../assets/pngs/firends.png';
-import GifFriends from '../assets/gifs/firends.webp';
+
 
 export default function Footer({ onSlideChange, activeSlide }) {
     return (

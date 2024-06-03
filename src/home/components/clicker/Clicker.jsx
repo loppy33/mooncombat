@@ -1,8 +1,6 @@
 import React, { useState, useRef, useCallback } from 'react';
 import './Clicker.sass';
 import ImageGold from '../../../assets/pngs/gold.png';
-import GifFire from '../../../assets/gifs/fire.webp';
-import GifCloud from '../../../assets/gifs/cloud.webp';
 import Lottie from 'lottie-react';
 import Diamon from './diamond.json';
 

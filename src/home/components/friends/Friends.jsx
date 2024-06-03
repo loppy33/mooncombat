@@ -1,6 +1,5 @@
 import './Friends.sass'
 
-import ImageFriendsSecond from '../../../assets/gifs/friends2.webp'
 import ImageAvatar from '../../../assets/pngs/avatar.jpg'
 
 export default function Friends() {
