@@ -38,7 +38,7 @@ export default function Clicker() {
 
             window.navigator.vibrate(50)
             const tg = window.Telegram.WebApp
-            tg.HapticFeedback.impactOccurred("light")
+            tg.HapticFeedback.impactOccurred("rigid")
 
 
             setTimeout(() => {
