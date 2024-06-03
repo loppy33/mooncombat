@@ -23,6 +23,7 @@ export default function Clicker() {
 
     const handleTouchEnd = useCallback((event) => {
         setTimeout(() => {
+            impactOccurred("rigid")
             const touches = event.changedTouches;
             const container = containerRef.current.getBoundingClientRect();
 
@@ -61,7 +62,7 @@ export default function Clicker() {
                     onTouchStart={handleTouchStart}
                     onTouchEnd={handleTouchEnd}
                     className={`clickContainer ${tilt}`}
-                    onClick={() => impactOccurred("rigid")}
+
                 >
                     <Lottie
                         animationData={Diamon}
