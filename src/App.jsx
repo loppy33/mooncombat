@@ -10,7 +10,7 @@ const tg = window.Telegram.WebApp
 function App() {
   useEffect(() => {
     tg.expand()
-    tg.colorScheme = "dark"
+    tg.setHeaderColor("#000000")	
   }, []);
 
   return (
