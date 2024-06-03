@@ -37,13 +37,7 @@ export default function Clicker() {
             }));
 
             setClicks((prevClicks) => [...prevClicks, ...newClicks]);
-
-
-
-            window.navigator.vibrate(50)
-
-
-
+            
             setTimeout(() => {
                 setClicks((prevClicks) => prevClicks.filter(click => !newClicks.some(newClick => newClick.id === click.id)));
             }, 1000);
