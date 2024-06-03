@@ -1,6 +1,5 @@
 .Clicker
     position: relative
-    height: 70vh
     text-align: center
 
     .lvl
@@ -21,6 +20,7 @@
             border: 2px solid #2A3744
             background: #121E28
             position: relative
+
             &::before
                 content: ''
                 border-radius: 20px
@@ -50,16 +50,18 @@
                 transform: translateY(-150px)
 
     .clickContainer
+        background-color: red
+        transition: 0.1s
+
         &.right
-            transform: rotate(10deg) scale(0.9)
+            transform: rotate(5deg) scale(0.95)
         &.left
-            transform: rotate(-10deg) scale(0.9)
+            transform: rotate(-5deg) scale(0.95)
 
         .clickImg
             pointer-events: none
 
             width: calc(100% - 20px)
-            transition: 0.1s
             cursor: pointer
 
     .energy
