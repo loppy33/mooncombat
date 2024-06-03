@@ -11,11 +11,9 @@ function App() {
   const [checkTg, setCheckTg] = useState('no')
   useEffect(() => {
     console.log(1);
-    if (window.Telegram?.WebApp) {
       const tg = window.Telegram.WebApp
       tg.expand()
       checkTg('yes')
-    }
   }, []);
 
   return (
