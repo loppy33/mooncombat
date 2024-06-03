@@ -61,7 +61,7 @@ export default function Clicker() {
                     onTouchStart={handleTouchStart}
                     onTouchEnd={handleTouchEnd}
                     className={`clickContainer ${tilt}`}
-                    onClick={() => selectionChanged()}
+                    onClick={() => impactOccurred("rigid")}
                 >
                     <Lottie
                         animationData={Diamon}
