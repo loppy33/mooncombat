@@ -3,6 +3,7 @@
     text-align: center
 
     .lvl
+        margin-top: 20px
         h4
             display: flex
             align-items: center
@@ -12,6 +13,7 @@
             margin-bottom: 5px
             img
                 width: 25px
+
         span
             display: block
             border-radius: 20px
@@ -50,18 +52,19 @@
                 transform: translateY(-150px)
 
     .clickContainer
-        background-color: red
-        transition: 0.1s
+        transition: 0.3s
+        margin: auto
+        width: calc( 100% - 20px )
 
         &.right
-            transform: rotate(5deg) scale(0.95)
+            transform: rotate(3deg) scale(0.95)
         &.left
-            transform: rotate(-5deg) scale(0.95)
+            transform: rotate(-3deg) scale(0.95)
 
         .clickImg
             pointer-events: none
 
-            width: calc(100% - 20px)
+            width: 100%
             cursor: pointer
 
     .energy

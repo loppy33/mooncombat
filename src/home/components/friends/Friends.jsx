@@ -6,7 +6,7 @@ import ImageAvatar from '../../../assets/pngs/avatar.jpg'
 export default function Friends() {
     return (
         <div className='Friends'>
-            <h2><img src={ImageFriendsSecond} alt="" /> Invite friends</h2>
+            <h2>Invite friends</h2>
             <p>For each friend you invite you will receive bonuses.</p>
             <div className="frinedsContainer">
                 <h3>Friends List (5)</h3>
