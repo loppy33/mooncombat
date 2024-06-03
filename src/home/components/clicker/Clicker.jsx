@@ -6,8 +6,7 @@ import Lottie from 'lottie-react';
 import Diamon from './diamond.json';
 import { useHapticFeedback } from "@vkruglikov/react-telegram-web-app";
 
-export default function Clicker() {
-    const [energy, setEnergy] = useState(1000);
+export default function Clicker({ setBalance, setEnergy, energy }) {
     const [clicks, setClicks] = useState([]);
     const [tilt, setTilt] = useState('');
     const containerRef = useRef(null);
@@ -29,7 +28,8 @@ export default function Clicker() {
             const container = containerRef.current.getBoundingClientRect();
 
             setTilt('');
-            setEnergy((prevEnergy) => Math.max(prevEnergy - touches.length, 0));
+            setBalance((prevBalance) => prevBalance + 14, 0)
+            setEnergy((prevEnergy) => Math.max(prevEnergy - 1, 0));
 
             const newClicks = Array.from(touches).map((touch, index) => ({
                 id: Date.now() + index,
@@ -38,7 +38,7 @@ export default function Clicker() {
             }));
 
             setClicks((prevClicks) => [...prevClicks, ...newClicks]);
-            
+
             setTimeout(() => {
                 setClicks((prevClicks) => prevClicks.filter(click => !newClicks.some(newClick => newClick.id === click.id)));
             }, 1000);
@@ -73,7 +73,7 @@ export default function Clicker() {
 
                 {clicks.map((click) => (
                     <div key={click.id} className="click-effect" style={{ top: click.y, left: click.x }}>
-                        + 1
+                        + 14
                     </div>
                 ))}
 

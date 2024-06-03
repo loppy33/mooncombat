@@ -10,6 +10,9 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 
 export default function Home() {
+    const [balance, setBalance] = useState(0);
+    const [energy, setEnergy] = useState(1000);
+
     const [activeSlide, setActiveSlide] = useState(0);
     const swiperRef = useRef(null);
 
@@ -20,7 +23,16 @@ export default function Home() {
             });
         }
 
-    }, []);
+        const interval = setInterval(() => {
+            if (energy !== 1000) {
+                const randomIncrease = Math.floor(Math.random() * (9 - 3 + 1)) + 3;
+                setEnergy(prevEnergy => Math.min(prevEnergy + randomIncrease, 1000));
+            }
+        }, 1000);
+
+        return () => clearInterval(interval);
+
+    }, [energy]);
 
     const handleSlideChange = useCallback((index) => {
         setActiveSlide(index);
@@ -30,14 +42,14 @@ export default function Home() {
     return (
         <div className="Home">
             <div className="container">
-                <Header />
+                <Header balance={balance}/>
                 <Swiper
                     ref={swiperRef}
                     className="mySwiper"
                     modules={[Pagination]}
                 >
                     <SwiperSlide>
-                        <Clicker />
+                        <Clicker setBalance={setBalance} setEnergy={setEnergy} energy={energy}/>
                     </SwiperSlide>
                     
                     <SwiperSlide>
