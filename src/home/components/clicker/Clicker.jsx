@@ -69,16 +69,17 @@ export default function Clicker() {
                         className="clickImg"
                     />
                 </div>
+                <div className="energy">
+                    {/* <img src={GifFire} alt="" /> */}
+                    <h3>{energy} <br /><span>/ 1000</span></h3>
+                </div>
+
                 {clicks.map((click) => (
                     <div key={click.id} className="click-effect" style={{ top: click.y, left: click.x }}>
                         + 1
                     </div>
                 ))}
 
-                <div className="energy">
-                    <img src={GifFire} alt="" />
-                    <h3>{energy} <br /><span>/ 1000</span></h3>
-                </div>
             </div>
 
         </div>
