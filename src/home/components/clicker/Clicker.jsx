@@ -1,6 +1,7 @@
 import React, { useState, useRef, useCallback } from 'react';
 import './Clicker.sass';
 import ImageGold from '../../../assets/pngs/gold.png';
+import ImageEnergy from '../../../assets/pngs/energy.png';
 import Lottie from 'lottie-react';
 import Diamon from './diamond.json';
 import { useHapticFeedback } from "@vkruglikov/react-telegram-web-app";
@@ -66,7 +67,7 @@ export default function Clicker() {
                     />
                 </div>
                 <div className="energy">
-                    {/* <img src={GifFire} alt="" /> */}
+                    <img src={ImageEnergy} alt="" />
                     <h3>{energy} <br /><span>/ 1000</span></h3>
                 </div>
 
