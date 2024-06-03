@@ -9,7 +9,7 @@ import { Pagination } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/pagination';
 
-export default function Home({checkTg}) {
+export default function Home() {
     const [activeSlide, setActiveSlide] = useState(0);
     const swiperRef = useRef(null);
 
@@ -31,7 +31,6 @@ export default function Home({checkTg}) {
         <div className="Home">
             <div className="container">
                 <Header />
-                <p>{checkTg}</p>
                 <Swiper
                     ref={swiperRef}
                     className="mySwiper"

@@ -4,22 +4,18 @@ import Home from './home/Home';
 import { useEffect, useState } from 'react';
 
 
-
+const tg = window.Telegram.WebApp
 // Инициализация Telegram Web Apps SDK и запрос на развертывание на полный экран
 
 function App() {
-  const [checkTg, setCheckTg] = useState('no')
   useEffect(() => {
-    console.log(1);
-    const tg = window.Telegram.WebApp
     tg.expand()
-    checkTg('yes')
   }, []);
 
   return (
     <BrowserRouter>
       <Routes>
-        <Route path='mooncombat/' element={<Home checkTg={checkTg} />} />
+        <Route path='mooncombat/' element={<Home />} />
       </Routes>
     </BrowserRouter>
   )
