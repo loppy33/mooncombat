@@ -40,8 +40,7 @@ export default function Clicker() {
 
 
             window.navigator.vibrate(50)
-            impactOccurred("rigid")
-            notificationOccurred("success")
+
             selectionChanged()
 
 
