@@ -4,11 +4,14 @@ import ImageGold from '../../../assets/pngs/gold.png';
 import Lottie from 'lottie-react';
 import Diamon from './diamond.json';
 
+import ClickSound from './click.mp3';
+
 export default function Clicker() {
     const [energy, setEnergy] = useState(1000);
     const [clicks, setClicks] = useState([]);
     const [tilt, setTilt] = useState('');
     const containerRef = useRef(null);
+    const audioRef = useRef(null);
 
     const handleTouchStart = useCallback((event) => {
         const container = containerRef.current.getBoundingClientRect();
@@ -35,19 +38,13 @@ export default function Clicker() {
 
             setClicks((prevClicks) => [...prevClicks, ...newClicks]);
 
-
-
-            window.navigator.vibrate(50)
-            const tg = window.Telegram.WebApp
-            tg.HapticFeedback.impactOccurred("rigid")
-            tg.HapticFeedback.notificationOccurred("success")
-            tg.HapticFeedback.selectionChanged()
-
+            // Воспроизведение звука клика
+            audioRef.current.play();
 
             setTimeout(() => {
                 setClicks((prevClicks) => prevClicks.filter(click => !newClicks.some(newClick => newClick.id === click.id)));
             }, 1000);
-        }, 100); // Adding a 100ms delay before processing clicks
+        }, 100); // Добавление задержки 100 мс перед обработкой кликов
     }, []);
 
     return (
@@ -75,14 +72,15 @@ export default function Clicker() {
                     <h3>{energy} <br /><span>/ 1000</span></h3>
                 </div>
 
+                {/* Элемент audio для воспроизведения звука */}
+                <audio ref={audioRef} src={ClickSound} />
+
                 {clicks.map((click) => (
                     <div key={click.id} className="click-effect" style={{ top: click.y, left: click.x }}>
                         + 1
                     </div>
                 ))}
-
             </div>
-
         </div>
     );
 }
