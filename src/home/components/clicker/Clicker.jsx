@@ -36,7 +36,7 @@ export default function Clicker() {
             setClicks((prevClicks) => [...prevClicks, ...newClicks]);
 
 
-            window.navigator.vibrate(100)
+            window.navigator.vibrate(50)
             // Play the click sound
 
             setTimeout(() => {
