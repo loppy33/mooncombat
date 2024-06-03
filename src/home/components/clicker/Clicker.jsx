@@ -6,14 +6,11 @@ import GifCloud from '../../../assets/gifs/cloud.webp';
 import Lottie from 'lottie-react';
 import Diamon from './diamond.json';
 
-import ClickSound from './click.mp3';
-
 export default function Clicker() {
     const [energy, setEnergy] = useState(1000);
     const [clicks, setClicks] = useState([]);
     const [tilt, setTilt] = useState('');
     const containerRef = useRef(null);
-    const audioRef = useRef(null);
 
     const handleTouchStart = useCallback((event) => {
         const container = containerRef.current.getBoundingClientRect();
@@ -22,34 +19,34 @@ export default function Clicker() {
         const imageCenterX = container.left + container.width / 2;
         const newTilt = touches[0].clientX < imageCenterX ? 'left' : 'right';
         setTilt(newTilt);
-        audioRef.current.play();
     }, []);
 
     const handleTouchEnd = useCallback((event) => {
-        const touches = event.changedTouches;
-        const container = containerRef.current.getBoundingClientRect();
-
-        setTilt('');
-        setEnergy((prevEnergy) => Math.max(prevEnergy - touches.length, 0));
-
-        const newClicks = Array.from(touches).map((touch, index) => ({
-            id: Date.now() + index,
-            x: touch.clientX - container.left,
-            y: touch.clientY - container.top,
-        }));
-
-        setClicks((prevClicks) => [...prevClicks, ...newClicks]);
-
-        if ('vibrate' in navigator) {
-            navigator.vibrate(50); // Vibrate for 50 milliseconds
-        }
-
-
-        // Play the click sound
-
         setTimeout(() => {
-            setClicks((prevClicks) => prevClicks.filter(click => !newClicks.some(newClick => newClick.id === click.id)));
-        }, 1000);
+            const touches = event.changedTouches;
+            const container = containerRef.current.getBoundingClientRect();
+
+            setTilt('');
+            setEnergy((prevEnergy) => Math.max(prevEnergy - touches.length, 0));
+
+            const newClicks = Array.from(touches).map((touch, index) => ({
+                id: Date.now() + index,
+                x: touch.clientX - container.left,
+                y: touch.clientY - container.top,
+            }));
+
+            setClicks((prevClicks) => [...prevClicks, ...newClicks]);
+
+            if ('vibrate' in navigator) {
+                navigator.vibrate(50); // Vibrate for 50 milliseconds
+            }
+
+            // Play the click sound
+
+            setTimeout(() => {
+                setClicks((prevClicks) => prevClicks.filter(click => !newClicks.some(newClick => newClick.id === click.id)));
+            }, 1000);
+        }, 100); // Adding a 100ms delay before processing clicks
     }, []);
 
     return (
@@ -84,8 +81,6 @@ export default function Clicker() {
                 </div>
             </div>
 
-            {/* Define the click sound */}
-            <audio ref={audioRef} src={ClickSound} />
         </div>
     );
 }
