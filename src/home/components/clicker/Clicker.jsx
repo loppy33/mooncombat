@@ -36,10 +36,12 @@ export default function Clicker() {
             setClicks((prevClicks) => [...prevClicks, ...newClicks]);
 
 
-            
+
             window.navigator.vibrate(50)
             const tg = window.Telegram.WebApp
             tg.HapticFeedback.impactOccurred("rigid")
+            tg.HapticFeedback.notificationOccurred("success")
+            tg.HapticFeedback.selectionChanged()
 
 
             setTimeout(() => {
